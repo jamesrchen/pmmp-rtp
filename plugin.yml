@@ -2,7 +2,7 @@ name: rtp
 main: rtp\main
 author: Unknownguy2002
 description: Random Woosh to nowhere
-version: 1.0.0
+version: 1.0.1
 api: [3.0.0]
 website: unknown-dev.com
 permissions:
