@@ -5,6 +5,9 @@ description: Random Woosh to nowhere
 version: 1.0.0
 api: [3.0.0]
 website: unknown-dev.com
+permissions:
+ rtp:
+  default: true
 commands:
   rtp:
     description: "Teleport Players randomly"

@@ -16,21 +16,23 @@ class main extends PluginBase implements Listener{
 		$this->getLogger()->info('RTP Enabled');
 	}
 	public function onDisable() {
-		$this->getLogger()->info('[RTP] Disable');
+		$this->getLogger()->info('[RTP] Disabled');
 	}
 	public function onCommand(CommandSender $sender, Command $command, string $label, array $args):bool{
 		switch(strtolower($command->getName())) {
 			case 'rtp':
-				$x = mt_rand('-300', '5000');
-				$y = mt_rand('70', '120');
-				$z = mt_rand('-300', '5000');
-				$sender->teleport(new Position($x, $y, $z));
-				$togive = new EffectInstance(Effect::getEffect(11));
-				$togive->setDuration(20*8);
-				$togive->setAmplifier(20);
-				$sender->addEffect($togive);
-				$sender->sendMessage("§4You were confused and walked to nowhere");
-				return true;
-		}		
+				if($sender->hasPermission("rtp")){
+					$x = mt_rand('-300', '5000');
+					$y = mt_rand('70', '120');
+					$z = mt_rand('-300', '5000');
+					$sender->teleport(new Position($x, $y, $z));
+					$togive = new EffectInstance(Effect::getEffect(11));
+					$togive->setDuration(20*8);
+					$togive->setAmplifier(20);
+					$sender->addEffect($togive);
+					$sender->sendMessage("§4You were confused and walked to nowhere");
+				}
+		}
+		return true;	
 	}
 }
