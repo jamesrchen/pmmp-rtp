@@ -1,0 +1,10 @@
+---
+# Time to wait before teleporting user
+waittime: 3
+
+# Time given for resistence(To prevent player fall death)
+resistsec: 8
+
+# Message to say after teleporting
+message: "§4Whoosh, you were blown away™"
+...
