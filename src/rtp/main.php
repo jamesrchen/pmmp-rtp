@@ -12,6 +12,8 @@ use pocketmine\level\Position;
 use pocketmine\entity\Effect;
 use pocketmine\entity\EffectInstance;
 use pocketmine\utils\Config;
+use rtp\task\countend;
+
 class main extends PluginBase implements Listener{
 	/** @var Config */
     public $Config;
@@ -28,21 +30,14 @@ class main extends PluginBase implements Listener{
 		switch(strtolower($command->getName())) {
 			case 'rtp':
 				if($sender->hasPermission("rtp")){
-					for ($wait = $this->getConfig()->get("waittime") ; $wait > 0 ; $wait--){
-						$sender->sendMessage("Waiting for $wait more second(s)");
-						sleep(1);
-					}
-					$x = mt_rand('-300', '5000');
-					$y = mt_rand('70', '120');
-					$z = mt_rand('-300', '5000');
-					$sender->teleport(new Position($x, $y, $z));
-					$togive = new EffectInstance(Effect::getEffect(11));
-					$togive->setDuration(20*$this->getConfig()->get("resistsec"));
-					$togive->setAmplifier(20);
-					$sender->addEffect($togive);
-					$sender->sendMessage($this->getConfig()->get("message"));
+					$sender->sendMessage("Waiting for ". $this->getConfig()->get("waittime") ." second(s)");
+					$this->getScheduler()->scheduleRepeatingTask(new countend($this, $sender), 1 * 20);
 				}
 		}
 		return true;	
 	}
+	public function removeTask($id) {
+		$this->getScheduler()->cancelTask($id);
+	}
 }
+
